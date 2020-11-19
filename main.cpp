@@ -10,7 +10,7 @@
 #include <windows.h> // Needed for all Winsock stuff
 //----- Defines ---------------------------------------------------------------
 //----- Defines ---------------------------------------------------------------
-#define PORT_NUM 502		// modbus的
+#define PORT_NUM 502		// modbus的port
 #define IP_ADDR "127.0.0.1" // IP address of server (*** HARDWIRED ***)
 //===== Main program ==========================================================
 int main()
