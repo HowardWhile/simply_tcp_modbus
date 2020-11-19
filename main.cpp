@@ -1,5 +1,4 @@
 // TCP Client ref: https://www.csee.usf.edu/~kchriste/tools/tcpClient.c
-// 
 
 #define WIN 
 //----- Include files ---------------------------------------------------------
@@ -9,9 +8,9 @@
 #include <stdlib.h> // Needed for exit()
 #include <windows.h> // Needed for all Winsock stuff
 //----- Defines ---------------------------------------------------------------
-//----- Defines ---------------------------------------------------------------
 #define PORT_NUM 502		// modbus的port
 #define IP_ADDR "127.0.0.1" // IP address of server (*** HARDWIRED ***)
+
 //===== Main program ==========================================================
 int main()
 {
@@ -51,6 +50,24 @@ int main()
 	}
 
 
+	// simply modbus
+	using namespace arc_modbus;
+	int PLC_ADDR_BASE = 0;
+	int SlaveID = 1;
+	modbus_tcp_pkg pTool(PLC_ADDR_BASE, SlaveID);
+
+	std::vector<char> pkg;
+	int byte2read;
+	
+	pkg = pTool.ReadRequest(READ_RW_BITS, 0, 10, byte2read); // read coil 0~9
+
+	printf("pkg (%d) =>",pkg.size());
+	for (auto &b : pkg) // for each 
+	{
+		printf(" %02X", b);
+	}	
+	printf("\r\n");
+	
 	
 
 	// >>> Step #3 <<<
